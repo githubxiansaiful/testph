@@ -83,7 +83,7 @@ const UploadImage = () => {
 
 
     const handleAddNewImage = () => {
-        if (imageInputs.length < 5) {
+        if (imageInputs.length < 100) {
             setImageInputs([...imageInputs, { id: Date.now(), url: "", valid: false }]);
         }
     };
@@ -232,7 +232,7 @@ const UploadImage = () => {
                             </div>
                         ))}
 
-                        {imageInputs.length < 5 && (
+                        {imageInputs.length < 100 && (
                             <div className="add-new-image cursor-pointer text-blue-500" onClick={handleAddNewImage}>
                                 <p>Add New Image</p>
                             </div>
