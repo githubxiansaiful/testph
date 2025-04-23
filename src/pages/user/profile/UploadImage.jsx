@@ -142,7 +142,7 @@ const UploadImage = () => {
                     setTimeout(() => {
                         if (res.ok) resolve(data);
                         else reject(data);
-                    }, 2000);
+                    }, 10);
                 })
                 .catch((err) => {
                     setTimeout(() => reject(err), 2000);

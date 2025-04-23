@@ -6,7 +6,7 @@ const CategoryPop = ({ show, onClose }) => {
 
 
     useEffect(() => {
-        fetch("https://photoshub-server.vercel.app/images")
+        fetch("https://photoshub-server.vercel.app/stock-photos-hub")
             .then(res => res.json())
             .then(data => {
                 setCategories(data);
