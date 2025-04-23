@@ -5,7 +5,7 @@ import OpenImgPopup from "./OpenImgPopup.jsx";
 
 const Images = () => {
     const [images, setImages] = useState([]);
-    const [visibleCount, setVisibleCount] = useState(12);
+    const [visibleCount, setVisibleCount] = useState(50);
     const [loadingMore, setLoadingMore] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [selectedImage, setSelectedImage] = useState(null);
@@ -32,7 +32,7 @@ const Images = () => {
             if (scrollBottom && !loadingMore && visibleCount < images.length) {
                 setLoadingMore(true);
                 setTimeout(() => {
-                    setVisibleCount(prev => prev + 15);
+                    setVisibleCount(prev => prev + 50);
                     setLoadingMore(false);
                 }, 1500); // simulate loading delay
             }
