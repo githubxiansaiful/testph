@@ -8,7 +8,6 @@ const UploadImage = () => {
     const [loading, setLoading] = useState(false);
     const formRef = useRef();
     const { user } = useContext(AuthContext);
-
     const [imageInputs, setImageInputs] = useState([
         {
             id: Date.now(),
@@ -23,7 +22,7 @@ const UploadImage = () => {
     // 🔍 On image URL change, call the image recognition API:
     const analyzeImage = async (url) => {
         try {
-            const res = await fetch("https://api.imagga.com/v2/tags?image_url=" + encodeURIComponent(url), {
+            const res = await fetch("https://api.imagga.com/v2/tags?image_url=removeit" + encodeURIComponent(url), {
                 headers: {
                     Authorization: "Basic " + btoa("acc_16e964c30deaa75:ab6326c12d0a7ad9886889c35c2727c3")
                 }
@@ -35,7 +34,6 @@ const UploadImage = () => {
                 console.error("Image analysis failed:", data);
                 return {
                     title: "",
-                    category: "",
                     tag: "",
                 };
             }
@@ -51,7 +49,6 @@ const UploadImage = () => {
             console.error("Image metadata error:", error);
             return {
                 title: "",
-                category: "",
                 tag: "",
             };
         }
@@ -105,9 +102,6 @@ const UploadImage = () => {
         setImageInputs(newInputs);
     };
 
-
-
-
     // Send image to server
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -128,7 +122,7 @@ const UploadImage = () => {
                         url: img.url,
                         title: img.title,
                         category: img.category,
-                        tag: img.tag,
+                        tag: img.tag.split(',').map(tag => tag.trim()).filter(tag => tag),
                     })),
                     user: {
                         displayName: user?.displayName,
@@ -212,13 +206,21 @@ const UploadImage = () => {
                                         onChange={(e) => handleInputChange(index, 'title', e.target.value)}
                                         className="w-full border p-2 mt-2"
                                     />
-                                    <input
-                                        type="text"
-                                        placeholder="Category (optional)"
-                                        value={input.category}
+                                    <select
                                         onChange={(e) => handleInputChange(index, 'category', e.target.value)}
-                                        className="w-full border p-2 mt-2"
-                                    />
+                                        value={input.category}
+                                        className="w-full border border-[#ddd] p-2 mt-2 rounded-[10px] bg-white">
+                                        <option value="Adult">Adult</option>
+                                        <option value="Sexy Girl">Sexy Girl</option>
+                                        <option value="Chubby Girl">Chubby Girl</option>
+                                        <option value="Deshi">Deshi</option>
+                                        <option value="Ass">Ass</option>
+                                        <option value="Nude">Nude</option>
+                                        <option value="Boobs">Boobs</option>
+                                        <option value="Pussy">Pussy</option>
+                                        <option value="Bra/Panty">Bra/Panty</option>
+                                    </select>
+
                                     <input
                                         type="text"
                                         placeholder="Tags (optional)"

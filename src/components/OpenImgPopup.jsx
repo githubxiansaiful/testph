@@ -62,7 +62,7 @@ const OpenImgPopup = ({ image, onClose, onPrev, onNext, isFirst, isLast }) => {
                 {/* Image and Info */}
                 <div className="img-popup-nav mb-7">
                     <div className="flex justify-between">
-                        <div className="flex gap-3 items-center">
+                        <div className="flex gap-3 items-center hidden">
                             <div className="w-[50px] h-[50px]">
                                 <img src={image.user.photoURL} className="rounded-full" alt={`${image.user.displayName} avatar`} />
                             </div>
